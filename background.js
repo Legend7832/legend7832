@@ -1,3 +1,5 @@
+import { BackgroundUpdater } from "./backgroundUpdater.js"; // Adjust the import statement
+
 const VIEW_SOURCE_PREFIX = "view-source:";
 const HISTORY_URL = "chrome://history";
 const DOWNLOADS_URL = "chrome://downloads";
@@ -141,3 +143,10 @@ function onTabUpdate(tabId, _, tab) {
 }
 
 chrome.tabs.onUpdated.addListener(onTabUpdate);
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === "changeBackground") {
+    let updater = new BackgroundUpdater();
+    updater.uploadBackground();
+  }
+});
