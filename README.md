@@ -1,4 +1,4 @@
-##Original Repository created by bypassiwastaken
+## *Original Repository created by [bypassiwastaken](https://github.com/bypassiwastaken)
 
 # Skiovox Helper
 ### The helper extension for the Skiovox exploit.
