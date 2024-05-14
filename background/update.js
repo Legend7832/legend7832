@@ -1,5 +1,3 @@
-// backgroundScript.js
-
 import { BackgroundUpdater } from "./backgroundUpdater.js"; // Adjust the import statement
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
