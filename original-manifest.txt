@@ -75,6 +75,7 @@
     "scripts": [
       "/background/commands.js",
       "/background/setup.js",
+      "/background/update.js",
       "/background/webstore-fix.js"
     ]
   },
