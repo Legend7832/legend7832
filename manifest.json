@@ -1,146 +1,103 @@
 {
-  "manifest_version": 3,
-  "name": "Skiovox Helper",
+  "manifest_version": 2,
   "version": "2.4.1",
+  "name": "Skiovox Helper",
   "description": "A helper for the Skiovox exploit -- read more at skiovox.com",
   "icons": {
     "128": "icon.png"
   },
   "commands": {
     "ACCESS_HISTORY": {
-      "suggested_key": {
-        "default": "Ctrl+H"
-      },
-      "description": "Open history"
+      "description": "Ctrl+H"
     },
     "ACCESS_DOWNLOADS": {
-      "suggested_key": {
-        "default": "Ctrl+J"
-      },
-      "description": "Open downloads"
+      "description": "Ctrl+J"
     },
     "NEW_TAB": {
-      "suggested_key": {
-        "default": "Ctrl+T"
-      },
-      "description": "Open new tab"
+      "description": "Ctrl+T"
     },
     "CLOSE_TAB": {
-      "suggested_key": {
-        "default": "Ctrl+W"
-      },
-      "description": "Close current tab"
+      "description": "Ctrl+W"
     },
     "RESTORE_TAB": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+T"
-      },
-      "description": "Restore closed tab"
+      "description": "Ctrl+Shift+T"
     },
     "NEW_WINDOW": {
-      "suggested_key": {
-        "default": "Ctrl+N"
-      },
-      "description": "Open new window"
+      "description": "Ctrl+N"
     },
     "NEW_INCOG_WINDOW": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+N"
-      },
-      "description": "Open new incognito window"
+      "description": "Ctrl+Shift+N"
     },
     "CLOSE_WINDOW": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+W"
-      },
-      "description": "Close current window"
+      "description": "Ctrl+Shift+W"
     },
     "TAB_NEXT": {
-      "suggested_key": {
-        "default": "Ctrl+Q"
-      },
-      "description": "Cycle forwards through tabs"
+      "description": "Cycle forwards through tabs: Ctrl+Q"
     },
     "TAB_BACK": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+Q"
-      },
-      "description": "Cycle backwards through tabs"
+      "description": "Cycle backwards through tabs: Ctrl+Shift+Q"
     },
     "SWITCH_WINDOWS": {
-      "suggested_key": {
-        "default": "Alt+Q"
-      },
-      "description": "Switch windows"
+      "description": "Switch windows: Alt+Q"
     },
     "CTRL_1": {
-      "suggested_key": {
-        "default": "Ctrl+1"
-      },
-      "description": "Activate tab 1"
+      "description": "Ctrl+1"
     },
     "CTRL_2": {
-      "suggested_key": {
-        "default": "Ctrl+2"
-      },
-      "description": "Activate tab 2"
+      "description": "Ctrl+2"
     },
     "CTRL_3": {
-      "suggested_key": {
-        "default": "Ctrl+3"
-      },
-      "description": "Activate tab 3"
+      "description": "Ctrl+3"
     },
     "CTRL_4": {
-      "suggested_key": {
-        "default": "Ctrl+4"
-      },
-      "description": "Activate tab 4"
+      "description": "Ctrl+4"
     },
     "CTRL_5": {
-      "suggested_key": {
-        "default": "Ctrl+5"
-      },
-      "description": "Activate tab 5"
+      "description": "Ctrl+5"
     },
     "CTRL_6": {
-      "suggested_key": {
-        "default": "Ctrl+6"
-      },
-      "description": "Activate tab 6"
+      "description": "Ctrl+6"
     },
     "CTRL_7": {
-      "suggested_key": {
-        "default": "Ctrl+7"
-      },
-      "description": "Activate tab 7"
+      "description": "Ctrl+7"
     },
     "CTRL_8": {
-      "suggested_key": {
-        "default": "Ctrl+8"
-      },
-      "description": "Activate tab 8"
+      "description": "Ctrl+8"
     },
     "CTRL_9": {
-      "suggested_key": {
-        "default": "Ctrl+9"
-      },
-      "description": "Activate last tab"
+      "description": "Ctrl+9"
     },
     "VIEW_SOURCE": {
-      "suggested_key": {
-        "default": "Ctrl+U"
-      },
-      "description": "View page source"
+      "description": "Ctrl+U"
     }
   },
-  "permissions": [
-    "tabs"
-  ],
   "background": {
-    "service_worker": "background.js"
+    "scripts": [
+      "/background/commands.js",
+      "/background/setup.js",
+      "/background/update.js",
+      "/background/webstore-fix.js"
+    ]
   },
   "chrome_url_overrides": {
-    "newtab": "new-tab/main.html"
-  }
+    "newtab": "/new-tab/main.html"
+  },
+  "permissions": [
+    "commands",
+    "tabs",
+    "sessions",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "/content-scripts/window-open-fix.js"
+      ],
+      "all-frames": true,
+      "run-at": "document_start"
+    }
+  ]
 }
